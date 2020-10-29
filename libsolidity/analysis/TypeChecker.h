@@ -147,11 +147,6 @@ private:
 	void endVisit(Literal const& _literal) override;
 	void endVisit(UsingForDirective const& _usingForDirective) override;
 
-	bool contractDependenciesAreCyclic(
-		ContractDefinition const& _contract,
-		std::set<ContractDefinition const*> const& _seenContracts = std::set<ContractDefinition const*>()
-	) const;
-
 	/// @returns the referenced declaration and throws on error.
 	Declaration const& dereference(Identifier const& _identifier) const;
 	/// @returns the referenced declaration and throws on error.

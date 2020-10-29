@@ -23,6 +23,7 @@
 
 #pragma once
 
+#include <libsolidity/ast/ASTCompareByID.h>
 #include <libsolidity/ast/ASTForward.h>
 #include <libsolidity/ast/ASTEnums.h>
 #include <libsolidity/ast/ExperimentalFeatures.h>
@@ -159,9 +160,6 @@ struct ContractDefinitionAnnotation: TypeDeclarationAnnotation, StructurallyDocu
 	/// List of all (direct and indirect) base contracts in order from derived to
 	/// base, including the contract itself.
 	std::vector<ContractDefinition const*> linearizedBaseContracts;
-	/// List of contracts this contract creates, i.e. which need to be compiled first.
-	/// Also includes all contracts from @a linearizedBaseContracts.
-	std::set<ContractDefinition const*> contractDependencies;
 	/// Mapping containing the nodes that define the arguments for base constructors.
 	/// These can either be inheritance specifiers or modifier invocations.
 	std::map<FunctionDefinition const*, ASTNode const*> baseConstructorArguments;
@@ -169,6 +167,10 @@ struct ContractDefinitionAnnotation: TypeDeclarationAnnotation, StructurallyDocu
 	SetOnce<std::shared_ptr<CallGraph const>> creationCallGraph;
 	/// A graph with edges representing calls between functions that may happen in a deployed contract.
 	SetOnce<std::shared_ptr<CallGraph const>> deployedCallGraph;
+
+	/// List of contracts that this contract uses or creates, i.e. contracts which need to be compiled first.
+	/// The Value represents the ast node that referenced the contract
+	std::map<ContractDefinition const*, ASTNode const*, ASTCompareByID> contractDependencies;
 };
 
 struct CallableDeclarationAnnotation: DeclarationAnnotation

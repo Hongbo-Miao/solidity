@@ -26,6 +26,7 @@
 #include <libsolidity/ast/ASTForward.h>
 #include <libsolidity/ast/Types.h>
 #include <libsolidity/ast/ASTAnnotations.h>
+#include <libsolidity/ast/ASTCompareByID.h>
 #include <libsolidity/ast/ASTEnums.h>
 #include <libsolidity/parsing/Token.h>
 
@@ -65,24 +66,7 @@ class ASTConstVisitor;
 class ASTNode: private boost::noncopyable
 {
 public:
-	struct CompareByID
-	{
-		using is_transparent = void;
-
-		bool operator()(ASTNode const* _lhs, ASTNode const* _rhs) const
-		{
-			return _lhs->id() < _rhs->id();
-		}
-		bool operator()(ASTNode const* _lhs, int64_t _rhs) const
-		{
-			return _lhs->id() < _rhs;
-		}
-		bool operator()(int64_t _lhs, ASTNode const* _rhs) const
-		{
-			return _lhs < _rhs->id();
-		}
-	};
-
+	using CompareByID = frontend::ASTCompareByID;
 	using SourceLocation = langutil::SourceLocation;
 
 	explicit ASTNode(int64_t _id, SourceLocation _location);

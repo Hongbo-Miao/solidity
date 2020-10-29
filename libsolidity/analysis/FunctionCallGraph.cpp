@@ -205,6 +205,7 @@ bool FunctionCallGraphBuilder::visit(MemberAccess const& _memberAccess)
 		solAssert(*_memberAccess.annotation().requiredLookup == VirtualLookup::Static, "");
 
 	functionReferenced(*functionDef, _memberAccess.annotation().calledDirectly);
+
 	return true;
 }
 

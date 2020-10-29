@@ -47,6 +47,8 @@ set(sources
 	ast/AST_accept.h
 	ast/ASTAnnotations.cpp
 	ast/ASTAnnotations.h
+	ast/ASTCompareByID.cpp
+	ast/ASTCompareByID.h
 	ast/ASTEnums.h
 	ast/ASTForward.h
 	ast/ASTJsonConverter.cpp
