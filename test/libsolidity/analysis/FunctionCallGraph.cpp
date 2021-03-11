@@ -129,7 +129,7 @@ void checkCallGraphExpectations(
 	map<string, set<string>> const& _expectedEmittedEventSets = {}
 )
 {
-	auto getContractName = [](ContractDefinition const* _contract){ return _contract->name(); };
+	auto getContractName = [](pair<ContractDefinition const*, ASTNode const*> _contractPair){ return _contractPair.first->name(); };
 	auto eventToString = [](EventDefinition const* _event){ return toString(CallGraph::Node(_event)); };
 	auto notEmpty = [](set<string> const& _set){ return !_set.empty(); };
 
@@ -159,8 +159,8 @@ void checkCallGraphExpectations(
 		CallGraph const& callGraph = *_callGraphs.at(contractName);
 
 		edges[contractName] = edgeNames(callGraph.edges);
-		if (!callGraph.createdContracts.empty())
-			createdContractSets[contractName] = callGraph.createdContracts | views::transform(getContractName) | to<set<string>>();
+		if (!callGraph.bytecodeDependency.empty())
+			createdContractSets[contractName] = callGraph.bytecodeDependency | views::transform(getContractName) | to<set<string>>();
 		if (!callGraph.emittedEvents.empty())
 			emittedEventSets[contractName] = callGraph.emittedEvents | views::transform(eventToString) | to<set<string>>();
 	}
