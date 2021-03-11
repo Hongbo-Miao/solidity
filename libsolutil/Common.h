@@ -73,6 +73,9 @@ using StringMap = std::map<std::string, std::string>;
 // String types.
 using strings = std::vector<std::string>;
 
+/// Max depth a cycle detection recursion should go before erroring out
+size_t const MaxCycleDetectionRecursionDepth = 256;
+
 /// Interprets @a _u as a two's complement signed number and returns the resulting s256.
 inline s256 u2s(u256 _u)
 {

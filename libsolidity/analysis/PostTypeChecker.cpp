@@ -183,7 +183,7 @@ struct ConstStateVarCircularReferenceChecker: public PostTypeChecker::Checker
 	{
 		auto visitor = [&](VariableDeclaration const& _variable, util::CycleDetector<VariableDeclaration>& _cycleDetector, size_t _depth)
 		{
-			if (_depth >= 256)
+			if (_depth >= MaxCycleDetectionRecursionDepth)
 				m_errorReporter.fatalDeclarationError(7380_error, _variable.location(), "Variable definition exhausting cyclic dependency validator.");
 
 			// Iterating through the dependencies needs to be deterministic and thus cannot
