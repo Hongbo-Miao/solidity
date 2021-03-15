@@ -86,14 +86,15 @@ int registerTests(
 			fs::directory_iterator(fullpath),
 			fs::directory_iterator()
 		))
-			if (fs::is_directory(entry.path()) || TestCase::isTestFilename(entry.path().filename()))
+		{
+			bool addTest = true;
+			for (auto const& element: entry.path())
+				if (boost::starts_with(element.string(), "_"))
+					addTest = false;
+			if (addTest && (fs::is_directory(entry.path()) || TestCase::isTestFilename(entry.path().filename())))
 				numTestsAdded += registerTests(
-					*sub_suite,
-					_basepath, _path / entry.path().filename(),
-					_enforceViaYul,
-					_labels,
-					_testCaseCreator
-				);
+					*sub_suite, _basepath, _path / entry.path().filename(), _enforceViaYul, _labels, _testCaseCreator);
+		}
 		_suite.add(sub_suite);
 	}
 	else
