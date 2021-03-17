@@ -1,7 +1,7 @@
 ### 0.8.3 (unreleased)
 
 Language Features:
-
+ * Possibility to use ``bytes.concat`` with variable number of ``bytes`` and ``FixedBytes`` arguments which behaves as a restricted version of `abi.encodePacked` with a more descriptive name.
 
 Compiler Features:
  * Command Line Interface: Drop experimental support for ``--machine evm15``.

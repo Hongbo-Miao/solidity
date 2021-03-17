@@ -160,6 +160,29 @@ always use one of the value types ``bytes1`` to ``bytes32`` because they are muc
     that you are accessing the low-level bytes of the UTF-8 representation,
     and not the individual characters.
 
+.. index:: ! bytes-concat
+
+.. _bytes-concat:
+
+You can concatenate variable number of ``bytes`` or ``bytes1 ... bytes32`` using ``bytes.concat``.
+The function returns single ``bytes memory`` array that contains the contents of the arguments without padding.
+If you want to use string parameters or other types, you need to convert them to ``bytes`` or ``bytes1``/.../``bytes32`` first.
+
+::
+
+    // SPDX-License-Identifier: GPL-3.0
+    pragma solidity >0.8.2;
+
+    contract C {
+        bytes s = "Storage";
+        function f(bytes calldata c, string memory m, bytes16 b) public view {
+            bytes memory a = bytes.concat(s, c, c[:2], "Literal", bytes(m), b);
+            assert((s.length + c.length + 2 + 7 + bytes(m).length + 16) == a.length);
+        }
+    }
+
+If you call ``bytes.concat`` without arguments it will return an empty ``bytes`` array.
+
 .. index:: ! array;allocating, new
 
 Allocating Memory Arrays
