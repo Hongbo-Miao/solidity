@@ -1,7 +1,7 @@
 ### 0.8.3 (unreleased)
 
 Language Features:
-
+ * Allowing conversion from ``bytes`` to ``bytes1``/.../``bytes32``.
 
 Compiler Features:
  * Command Line Interface: Drop experimental support for ``--machine evm15``.
