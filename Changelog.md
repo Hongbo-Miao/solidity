@@ -1,6 +1,7 @@
 ### 0.8.3 (unreleased)
 
 Language Features:
+ * Support custom errors and introduce the ``revert`` statement.
 
 
 Compiler Features:
