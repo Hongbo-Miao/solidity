@@ -1,5 +1,8 @@
 ### 0.8.3 (unreleased)
 
+Important Bugfixes:
+ * Optimizer: Fix bug on incorrect caching of keccak256 hashes.
+
 Language Features:
 
 
