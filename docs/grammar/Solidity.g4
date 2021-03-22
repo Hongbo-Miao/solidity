@@ -1,7 +1,7 @@
 /**
  * Solidity is a statically typed, contract-oriented, high-level language for implementing smart contracts on the Ethereum platform.
  */
-grammar Solidity;
+parser grammar SolidityParser;
 
 options { tokenVocab=SolidityLexer; }
 
@@ -39,7 +39,7 @@ importAliases: symbol=identifier (As alias=identifier)?;
 /**
  * Path of a file to be imported.
  */
-path: NonEmptyStringLiteral;
+path: StringLiteral;
 /**
  * List of aliases for symbols to be imported.
  */

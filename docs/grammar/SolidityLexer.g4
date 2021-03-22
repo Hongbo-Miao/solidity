@@ -158,10 +158,7 @@ Dec: '--';
  * A single quoted string literal restricted to printable characters.
  */
 StringLiteral: '"' DoubleQuotedStringCharacter* '"' | '\'' SingleQuotedStringCharacter* '\'';
-/**
- * A single non-empty quoted string literal.
- */
-NonEmptyStringLiteral: '"' DoubleQuotedStringCharacter+ '"' | '\'' SingleQuotedStringCharacter+ '\'';
+
 // Note that this will also be used for Yul string literals.
 //@doc:inline
 fragment DoubleQuotedStringCharacter: DoubleQuotedPrintable | EscapeSequence;

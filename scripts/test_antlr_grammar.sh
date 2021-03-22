@@ -46,7 +46,7 @@ then
   (
   cd "${ROOT_DIR}"/docs/grammar
   # Create lexer/parser from grammar
-  java -jar "${ANTLR_JAR}" Solidity.g4 SolidityLexer.g4 -o "${WORKDIR}/src/"
+  java -jar "${ANTLR_JAR}" SolidityParser.g4 SolidityLexer.g4 -o "${WORKDIR}/src/"
 
   # Compile lexer/parser sources
   javac -classpath "${ANTLR_JAR}" "${WORKDIR}/src/"*.java -d "${WORKDIR}/target/"
@@ -117,6 +117,7 @@ done < <(
     "^\/\/ (Syntax|Type|Declaration)Error|^\/\/ ParserError (1684|2837|3716|3997|5333|6275|6281|6933|7319)|^==== Source:|^==== ExternalSource:" \
     "${ROOT_DIR}/test/libsolidity/syntaxTests" \
     "${ROOT_DIR}/test/libsolidity/semanticTests" |
+      grep -v -E 'syntaxTests/parsing/import_empty.sol' |
       grep -v -E 'comments/.*_direction_override.*.sol' |
       grep -v -E 'literals/.*_direction_override.*.sol'
       # Skipping the unicode tests as I couldn't adapt the lexical grammar to recursively counting RLO/LRO/PDF's.
